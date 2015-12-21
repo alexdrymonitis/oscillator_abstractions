@@ -1,0 +1,43 @@
+#N canvas 320 203 742 478 10;
+#X floatatom 48 236 5 0 0 0 - - -, f 5;
+#X obj 48 345 dac~;
+#X obj 48 311 *~ 0.2;
+#X obj 48 259 trapezoid~ 200 0.5 0.5;
+#N canvas 0 22 579 377 scope 0;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array scope 512 float 0;
+#X coords 0 1 511 -1 200 140 2 0 0;
+#X restore 100 100 graph;
+#X obj 345 214 tabwrite~ scope;
+#X obj 376 141 loadbang;
+#X obj 345 100 inlet~;
+#X obj 376 163 metro 90;
+#X connect 2 0 4 0;
+#X connect 3 0 1 0;
+#X connect 4 0 1 0;
+#X coords 0 -1 1 1 200 140 2 100 100;
+#X restore 125 294 pd scope;
+#X obj 19 16 cnv 15 340 30 empty empty empty 20 12 0 14 -191765 -66577
+0;
+#X text 26 55 This abstraction uses some objects from the zexy library.
+In order to be able to provide arguments but also use signals to all
+three inlets of the abstraction \, zexy's [sigzero~] is used. This
+means that if you send a constant 0 signal \, the abstraction's argument
+will be activated and the incoming signal will be ignored. To remedy
+that \, send a negative constant signal which is clipped internally.
+This will work like sending a constant 0;
+#X text 499 51 1st: frequency;
+#X text 500 68 2nd: ramp slope;
+#X text 500 85 3rd: duty cycle;
+#X text 442 31 Arguments/Inlets:;
+#X text 492 423 Written by Alexandros Drymonitis;
+#X text 29 21 [trapezoid~]: trapezoidal oscillator abstraction;
+#X floatatom 177 236 5 0 0 0 - - -, f 5;
+#X floatatom 112 236 5 0 0 0 - - -, f 5;
+#X connect 0 0 3 0;
+#X connect 2 0 1 0;
+#X connect 2 0 1 1;
+#X connect 3 0 2 0;
+#X connect 3 0 4 0;
+#X connect 13 0 3 2;
+#X connect 14 0 3 1;
