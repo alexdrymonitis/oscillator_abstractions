@@ -1,4 +1,4 @@
-#N canvas 392 165 451 459 10;
+#N canvas 392 165 567 457 10;
 #X obj 47 293 pow~;
 #X obj 47 387 *~;
 #X obj 151 348 *~ 2;
@@ -91,6 +91,10 @@
 #X connect 14 1 12 0;
 #X restore 47 44 pd set_freq;
 #X obj 274 106 inlet phase;
+#X msg 234 161 1 \, 0 10;
+#X obj 234 183 line~;
+#X obj 234 139 loadbang;
+#X text 289 162 workaround for [sigzero~] to work;
 #X connect 0 0 1 0;
 #X connect 1 0 11 0;
 #X connect 2 0 3 0;
@@ -110,3 +114,7 @@
 #X connect 16 0 0 1;
 #X connect 17 0 12 0;
 #X connect 18 0 7 1;
+#X connect 19 0 20 0;
+#X connect 20 0 17 0;
+#X connect 20 0 16 0;
+#X connect 21 0 19 0;
