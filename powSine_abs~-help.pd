@@ -1,0 +1,54 @@
+#N canvas 327 189 895 478 10;
+#X floatatom 39 189 5 0 0 0 - - -, f 5;
+#X text 426 106 inlets:;
+#X text 437 242 4 (control): phase reset (0 - 1);
+#X floatatom 109 190 5 0 0 0 - - -, f 5;
+#X obj 109 209 pack f 20;
+#X obj 109 231 line~;
+#X floatatom 148 233 5 0 0 0 - - -, f 5;
+#X text 514 179 a value of 0.5 creates an unaltered sinewave \, 0 creates
+a squarewave. values between 0 and 1 will broaden the sinewave's pulses
+\, and higher than 1 will narrow them;
+#X obj 19 17 cnv 15 340 30 empty empty empty 20 12 0 14 -191765 -66577
+0;
+#X text 40 21 Sinewave ocillator raised to a power;
+#X obj 39 345 dac~;
+#X obj 39 311 *~ 0.2;
+#N canvas 0 22 579 377 scope 0;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array scope 512 float 0;
+#X coords 0 1 511 -1 200 140 2 0 0;
+#X restore 100 100 graph;
+#X obj 345 214 tabwrite~ scope;
+#X obj 376 141 loadbang;
+#X obj 345 100 inlet~;
+#X obj 376 163 metro 90;
+#X connect 2 0 4 0;
+#X connect 3 0 1 0;
+#X connect 4 0 1 0;
+#X coords 0 -1 1 1 200 140 2 100 100;
+#X restore 116 294 pd scope;
+#X text 22 55 In order to be able to provide arguments but also use
+signals to all three inlets of the abstraction \, zexy's [sigzero~]
+is used. This means that if you send a constant 0 signal \, the abstraction's
+argument will be activated and the incoming signal will be ignored.
+To remedy that \, send a negative constant signal which is clipped
+internally. This will work like sending a constant 0;
+#X text 425 13 Arguments:;
+#X text 479 35 1st: frequency;
+#X text 481 55 2nd: power to raise the sine to;
+#X text 541 422 Written by Alexandros Drymonitis;
+#X text 437 162 3 (signal): power to raise the sinewave to;
+#X text 437 144 2 (signal): phase (for phase modulation);
+#X text 438 127 1 (singal): frequency;
+#X obj 39 254 powSine_abs~ 100 1;
+#X text 705 162 (defaults to 0.5);
+#X connect 0 0 21 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 21 2;
+#X connect 6 0 21 3;
+#X connect 11 0 10 0;
+#X connect 11 0 10 1;
+#X connect 21 0 11 0;
+#X connect 21 0 12 0;
