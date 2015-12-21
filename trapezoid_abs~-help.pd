@@ -1,0 +1,60 @@
+#N canvas 320 203 819 482 10;
+#X floatatom 48 238 5 0 0 0 - - -, f 5;
+#X obj 48 345 dac~;
+#X obj 48 311 *~ 0.2;
+#N canvas 0 22 579 377 scope 0;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array scope 512 float 0;
+#X coords 0 1 511 -1 200 140 2 0 0;
+#X restore 100 100 graph;
+#X obj 345 214 tabwrite~ scope;
+#X obj 376 141 loadbang;
+#X obj 345 100 inlet~;
+#X obj 376 163 metro 90;
+#X connect 2 0 4 0;
+#X connect 3 0 1 0;
+#X connect 4 0 1 0;
+#X coords 0 -1 1 1 200 140 2 100 100;
+#X restore 125 294 pd scope;
+#X obj 19 16 cnv 15 340 30 empty empty empty 20 12 0 14 -191765 -66577
+0;
+#X text 22 55 This abstraction uses some objects from the zexy library.
+In order to be able to provide arguments but also use signals to all
+three inlets of the abstraction \, zexy's [sigzero~] is used. This
+means that if you send a constant 0 signal \, the abstraction's argument
+will be activated and the incoming signal will be ignored. To remedy
+that \, send a negative constant signal which is clipped internally.
+This will work like sending a constant 0;
+#X text 499 51 1st: frequency;
+#X text 492 423 Written by Alexandros Drymonitis;
+#X floatatom 124 185 5 0 0 0 - - -, f 5;
+#X text 442 31 Arguments:;
+#X text 459 114 Inlets:;
+#X text 500 68 2nd: ramp slope (0 - 1);
+#X text 500 85 3rd: duty cycle (0 - 1);
+#X text 499 134 1st (signal): frequency;
+#X text 500 151 2nd (signal): phase (for phase modulation);
+#X text 500 168 3rd (signal): ramp slope (0 - 1);
+#X text 500 184 4th (signal): duty cycle (0 - 1);
+#X text 499 202 5th (control): phase reset (0 - 1);
+#X obj 48 259 trapezoid_abs~ 200 0.5 0.5;
+#X obj 124 204 pack f 20;
+#X obj 124 226 line~;
+#X floatatom 188 185 5 0 0 0 - - -, f 5;
+#X obj 188 204 pack f 20;
+#X obj 188 226 line~;
+#X floatatom 228 245 5 0 0 0 - - -, f 5;
+#X text 29 21 [trapezoid_abs~]: trapezoidal oscillator abstraction
+;
+#X connect 0 0 18 0;
+#X connect 2 0 1 0;
+#X connect 2 0 1 1;
+#X connect 8 0 19 0;
+#X connect 18 0 2 0;
+#X connect 18 0 3 0;
+#X connect 19 0 20 0;
+#X connect 20 0 18 2;
+#X connect 21 0 22 0;
+#X connect 22 0 23 0;
+#X connect 23 0 18 3;
+#X connect 24 0 18 4;
